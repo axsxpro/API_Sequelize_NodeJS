@@ -8,7 +8,7 @@ function getArticleInclusion() {
     return {
         attributes: { exclude: ['id_marque', 'id_couleur', 'id_type'] }, // Exclure les attributs id_pays et id_fabricant
         include: [
-                { model: Marque, ...getMarqueInclusions()},
+                {model: Marque, ...getMarqueInclusions()},
                 Couleur, // Inclure le modèle Couleur
                 Type // Inclure le modèle Type
             ] 

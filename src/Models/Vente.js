@@ -37,7 +37,7 @@ const Vente = sequelize.define('Vente', {
 // Définir les relations
 Vente.belongsTo(Ticket, {foreignKey: 'annee', targetKey: 'annee'});
 Vente.belongsTo(Ticket, {foreignKey: 'numero_ticket', targetKey: 'numero_ticket'});
-Vente.belongsTo(Article, {foreignKey: 'id_article',targetKey: 'id_article'});
+Vente.belongsTo(Article, {foreignKey: 'id_article'});
 
 
 module.exports = Vente;

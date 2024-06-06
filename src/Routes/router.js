@@ -10,6 +10,7 @@ const typeRoutes = require('./typeRoutes');
 const marqueRoutes = require('./marqueRoutes');
 const articleRoutes = require('./articleRoutes');
 const ticketRoutes = require('./ticketRoutes');
+const venteRoutes = require('./venteRoutes');
 
 
 // Utiliser un nom de route spécifique pour chaque ressource
@@ -22,6 +23,7 @@ router.use('/types', typeRoutes);
 router.use('/marques', marqueRoutes);
 router.use('/articles', articleRoutes);
 router.use('/tickets', ticketRoutes);
+router.use('/ventes', venteRoutes);
 
 
 module.exports = router;
