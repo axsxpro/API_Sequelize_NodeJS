@@ -26,4 +26,5 @@ router.use('/tickets', ticketRoutes);
 router.use('/ventes', venteRoutes);
 
 
+
 module.exports = router;

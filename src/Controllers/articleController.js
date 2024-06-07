@@ -2,10 +2,10 @@ const Article = require('../Models/Article');
 const articleInclusion = require('../Models/utils/articleInclusion');
 
 
-// Récupérer tous les articles
+//Récupérer tous les articles 
 async function getArticles(req, res) {
     try {
-        const articles = await Article.findAll(articleInclusion.getArticleInclusion());
+        const articles = await Article.findAll({...articleInclusion.getArticleInclusion(),limit: 10});
         res.json(articles);
     } catch (err) {
         res.status(500).json({ error: err.message });

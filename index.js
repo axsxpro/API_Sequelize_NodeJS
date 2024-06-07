@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const endpoints = require('./src/Routes/router');
 const sequelize = require('./src/Config/connexion'); //importation de sequilize dans le fichier connexion.js
 
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -33,9 +34,16 @@ async function authenticateDB() {
     }
 };
 
-
+//route pour les points d'API
 const apiRoot = '/api';
 app.use(apiRoot, endpoints);
+
+
+const swaggerRoutes = require('./swagger/swaggerRoutes');
+// Utiliser les routes Swagger
+app.use('/', swaggerRoutes);
+
+
 
 
 
