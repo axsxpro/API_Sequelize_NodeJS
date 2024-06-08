@@ -1,14 +1,17 @@
 const Ticket = require("../Models/Ticket");
 
+
+
 // Récupérer tous les tickets
 async function getTickets(req, res) {
   try {
-    const tickets = await Ticket.findAll();
+    const tickets = await Ticket.findAll({limit: 10 });
     res.json(tickets);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 }
+
 
 // Récupérer un ticket par ses clés primaires (annee et numero_ticket)
 async function getTicketById(req, res) {
@@ -31,6 +34,7 @@ async function getTicketById(req, res) {
   }
 }
 
+
 // Créer un nouveau ticket
 async function createTicket(req, res) {
   try {
@@ -40,6 +44,7 @@ async function createTicket(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
+
 
 // Mettre à jour un ticket par ses clés primaires (annee et numero_ticket)
 async function updateTicket(req, res) {

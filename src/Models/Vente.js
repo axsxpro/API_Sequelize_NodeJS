@@ -34,6 +34,7 @@ const Vente = sequelize.define('Vente', {
     timestamps: false
 });
 
+
 // Définir les relations
 Vente.belongsTo(Ticket, {foreignKey: 'annee', targetKey: 'annee'});
 Vente.belongsTo(Ticket, {foreignKey: 'numero_ticket', targetKey: 'numero_ticket'});
