@@ -48,6 +48,7 @@ async function createTicket(req, res) {
 
 // Mettre à jour un ticket par ses clés primaires (annee et numero_ticket)
 async function updateTicket(req, res) {
+  
   //extraire les valeurs des PARAMETRE DE LA REQUETE! et les assigner à les variables year et num
   const { year, num } = req.params;
 
