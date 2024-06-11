@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken'); // Importation du module jsonwebtoken pour 
 const bcrypt = require('bcrypt');// Importation du module bcrypt pour le hachage des mots de passe
 const User = require('../Models/User');// Importation du modèle User
 const Role = require('../Models/Role');// Importation du modèle Role
+require('dotenv').config(); // Charger les variables d'environnement
 
 
 // fonction pour l'inscription des utilisateurs
@@ -55,11 +56,17 @@ const login = async (req, res) => {
         }
 
         // Création du token JWT avec l'ID utilisateur et le rôle, expiraion de 24 heures
-        const token = jwt.sign({ id_user: user.id_user, role: user.Role.nom_role }, 'your_secret_key', {
-            expiresIn: 86400 // 24 heures
-        });
-
+        const token = jwt.sign(
+            
+            { id_user: user.id_user, role: user.Role.nom_role }, 
+            process.env.JWT_SECRET, 
+            { expiresIn: process.env.JWT_EXPIRATION}
+            
+        );
+        
+        res.header('Authorization', 'Bearer ' + token); // Ajouter l'en-tête Authorization avec le token
         res.status(200).json({ auth: true, token }); // Retourne un succès avec le token JWT
+
     } catch (error) {
         res.status(500).json({ message: 'Error logging in', error }); // Retourne une erreur si la connexion échoue
     }
