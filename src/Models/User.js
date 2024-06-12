@@ -22,7 +22,7 @@ const User = sequelize.define('User', {
         field: 'password',
     },
     id_role: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'id_role',
     }

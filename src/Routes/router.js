@@ -11,6 +11,7 @@ const marqueRoutes = require('./marqueRoutes');
 const articleRoutes = require('./articleRoutes');
 const ticketRoutes = require('./ticketRoutes');
 const venteRoutes = require('./venteRoutes');
+const userRoutes = require('./userRoutes');
 
 
 
@@ -25,6 +26,7 @@ router.use('/marques', marqueRoutes);
 router.use('/articles', articleRoutes);
 router.use('/tickets', ticketRoutes);
 router.use('/ventes', venteRoutes);
+router.use('/users', userRoutes);
 
 
 
