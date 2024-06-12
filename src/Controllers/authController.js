@@ -14,7 +14,7 @@ const register = async (req, res) => {
     try {
 
         const hashedPassword = await bcrypt.hash(password, 10); // Hachage du mot de passe avec un sel de 10
-        const userRole = await Role.findOne({ where: { nom_role: role } }); // Recherche du rôle dans la base de données
+        const userRole = await Role.findOne({ where: { id_role: role } }); // Recherche du rôle dans la base de données
 
         // Vérification si le rôle existe
         if (!userRole) {

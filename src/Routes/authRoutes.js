@@ -32,7 +32,7 @@ const { register, login } = require('../Controllers/authController');
  *               password:
  *                 type: string
  *               role:
- *                 type: string
+ *                 type: integer
  *     responses:
  *       201:
  *         description: User created successfully

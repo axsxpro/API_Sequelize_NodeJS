@@ -59,6 +59,7 @@ async function deleteUser(req, res) {
     }
 }
 
+
 module.exports = {
     getUsers,
     getUserById,

@@ -58,51 +58,10 @@ const userController = require('../Controllers/userController');
 router.get('/', userController.getUsers);  // GET ALL
 
 
-/**
- * @swagger
- * /api/users/{id}:
- *   get:
- *     summary: Get user by ID
- *     tags: [Users]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: The user ID
- *     responses:
- *       200:
- *         description: A single user
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/User'
- *       404:
- *         description: User not found
- */
-router.get('/:id', userController.getUserById); // GET by ID
+
+//route POST dans authController
 
 
-/**
- * @swagger
- * /api/users:
- *   post:
- *     summary: Create a new user
- *     tags: [Users]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/User'
- *     responses:
- *       201:
- *         description: User created successfully
- *       400:
- *         description: Invalid input
- */
-router.post('/', userController.createUser); // POST/CREATE
 
 /**
  * @swagger
