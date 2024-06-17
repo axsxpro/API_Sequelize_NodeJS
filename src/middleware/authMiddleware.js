@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken'); // Importer jsonwebtoken pour gérer les tokens JWT
 require('dotenv').config(); // Charger les variables d'environnement
 
+
 // Middleware pour vérifier le token JWT
 const verifyToken = (req, res, next) => {
 
@@ -8,6 +9,7 @@ const verifyToken = (req, res, next) => {
         const authHeader = req.header('Authorization'); // Extraire l'en-tête Authorization
         let token;
 
+        //attention à bien mettre l'espace apres le Bearer !
         if (authHeader && authHeader.startsWith('Bearer ')) {
             token = authHeader.slice(7, authHeader.length); // Extraire le token après "Bearer "
         }
@@ -23,7 +25,7 @@ const verifyToken = (req, res, next) => {
 
             // Si une erreur se produit lors de la vérification du token, cela indique généralement une invalidité du token, par exemple, une signature incorrecte ou un token expiré.
             if (err) {
-                return res.status(500).json({ message: 'Failed to authenticate token.' });
+                return res.status(500).json({ message: 'Failed to authenticate token.', error: err.message  });
             }
 
             // Si le token est valide, ajouter les informations utilisateur à la requête
@@ -40,5 +42,18 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-module.exports = verifyToken;
+// Middleware pour vérifier si l'utilisateur a le rôle d'admin
+const isAdmin = (req, res, next) => {
+
+    if (req.userRole !== 'admin') {
+        return res.status(403).json({ message: 'Access denied !! You are not authorized' });
+    }
+    next();
+};
+
+
+module.exports = { 
+    verifyToken, 
+    isAdmin 
+};
 

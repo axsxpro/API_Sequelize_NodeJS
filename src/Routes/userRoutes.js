@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../Controllers/userController');
+const { verifyToken, isAdmin } = require('../middleware/authMiddleware'); // Importer les middlewares
+
 
 /**
  * @swagger
@@ -55,7 +57,7 @@ const userController = require('../Controllers/userController');
  *       404:
  *         description: Users not found
  */
-router.get('/', userController.getUsers);  // GET ALL
+router.get('/', verifyToken, isAdmin, userController.getUsers);  // GET ALL
 
 
 
@@ -88,7 +90,7 @@ router.get('/', userController.getUsers);  // GET ALL
  *       404:
  *         description: User not found
  */
-router.put('/:id', userController.updateUser); // UPDATE by ID
+router.put('/:id', verifyToken, isAdmin, userController.updateUser); // UPDATE by ID
 
 /**
  * @swagger
@@ -109,6 +111,6 @@ router.put('/:id', userController.updateUser); // UPDATE by ID
  *       404:
  *         description: User not found
  */
-router.delete('/:id', userController.deleteUser); // DELETE by ID
+router.delete('/:id', verifyToken, isAdmin, userController.deleteUser); // DELETE by ID
 
 module.exports = router;

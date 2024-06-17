@@ -30,7 +30,7 @@ const register = async (req, res) => {
 
         res.status(201).json({ message: 'User created successfully' }); // Retourne un succès si l'utilisateur est créé
     } catch (error) {
-        res.status(500).json({ message: 'Error creating user', error }); // Retourne une erreur si la création échoue
+        res.status(500).json({ message: 'Error creating user', error: error.message}); // Retourne une erreur si la création échoue
     }
 };
 
@@ -68,8 +68,9 @@ const login = async (req, res) => {
         res.status(200).json({ auth: true, token }); // Retourne un succès avec le token JWT
 
     } catch (error) {
-        res.status(500).json({ message: 'Error logging in', error }); // Retourne une erreur si la connexion échoue
+        res.status(500).json({ message: 'Error logging in', error: error.message }); // Retourne une erreur si la connexion échoue
     }
+
 };
 
 

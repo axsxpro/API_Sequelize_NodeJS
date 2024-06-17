@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const roleController = require('../Controllers/roleController');
+const { verifyToken, isAdmin } = require('../middleware/authMiddleware'); // Importer les middlewares
 
 /**
  * @swagger
@@ -43,7 +44,7 @@ const roleController = require('../Controllers/roleController');
  *               items:
  *                 $ref: '#/components/schemas/Role'
  */
-router.get('/', roleController.getRoles);
+router.get('/',verifyToken, isAdmin, roleController.getRoles);
 
 
 /**
@@ -69,7 +70,7 @@ router.get('/', roleController.getRoles);
  *       404:
  *         description: Role not found
  */
-router.get('/:id', roleController.getRoleById);
+router.get('/:id', verifyToken, isAdmin, roleController.getRoleById);
 
 
 /**
@@ -90,7 +91,7 @@ router.get('/:id', roleController.getRoleById);
  *       400:
  *         description: Invalid input
  */
-router.post('/', roleController.createRole);
+router.post('/', verifyToken, isAdmin, roleController.createRole);
 
 /**
  * @swagger
@@ -117,7 +118,7 @@ router.post('/', roleController.createRole);
  *       404:
  *         description: Role not found
  */
-router.put('/:id', roleController.updateRole);
+router.put('/:id', verifyToken, isAdmin, roleController.updateRole);
 
 
 /**
@@ -139,7 +140,7 @@ router.put('/:id', roleController.updateRole);
  *       404:
  *         description: Role not found
  */
-router.delete('/:id', roleController.deleteRole);
+router.delete('/:id', verifyToken, isAdmin, roleController.deleteRole);
 
 
 module.exports = router;
