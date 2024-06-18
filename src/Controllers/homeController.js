@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 //definir route
-router.get('/', (req, res)=>{
+exports.home = async (req, res)=>{
     res.json('Bravo nodeJS fonctionne !')
-});
+};
