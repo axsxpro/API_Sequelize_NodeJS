@@ -7,11 +7,11 @@ const authRoutes = require('./src/Routes/authRoutes'); //importation des routes 
 const sequelize = require('./src/Config/connexion'); //importation de sequilize dans le fichier connexion.js
 require('dotenv').config(); // Charger les variables d'environnement
 const helmet = require('helmet');
+const http = require('http'); // Importer le module HTTP
 const https = require('https'); // Importer le module HTTPS
 const fs = require('fs'); // Importer le module FS
 const path = require('path'); // Importer le module Path
-
-
+const redirectToHttps = require('./src/middleware/redirectHttps'); // Importer le middleware de redirection
 
 
 
@@ -40,14 +40,23 @@ app.use(cors({
 
 app.toString('*', cors());
 
+
 // Charger les certificats SSL/TLS auto-signés depuis le dossier certs
 const privateKey = fs.readFileSync(path.join(__dirname, 'cert', 'key.pem'), 'utf8');
 const certificate = fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'), 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
+
 // Créer un serveur HTTPS avec les certificats chargés et l'application Express
 const httpsServer = https.createServer(credentials, app);
 
+app.use((req,res,next)=>{
+    if(rec.secure){
+        next();
+    }else{
+        req.redirect('https://'+req.host+req.url)
+    }
+});
 
 // Démarrer le serveur HTTPS sur le port spécifié (5000)
 httpsServer.listen(port, ()=> {

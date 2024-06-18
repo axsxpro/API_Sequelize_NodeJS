@@ -10,7 +10,7 @@ The Beer API is a RESTful API designed to manage and retrieve information about 
 
 - Backend: Node.js version 20.11.0
 - Database: Sequelize ORM, MySQL, PhpMyAdmin
-- Documentation: Swagger
+- Environment : Docker for database 
 
 ## Features
 
