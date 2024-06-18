@@ -7,6 +7,11 @@ const authRoutes = require('./src/Routes/authRoutes'); //importation des routes 
 const sequelize = require('./src/Config/connexion'); //importation de sequilize dans le fichier connexion.js
 require('dotenv').config(); // Charger les variables d'environnement
 const helmet = require('helmet');
+const https = require('https'); // Importer le module HTTPS
+const fs = require('fs'); // Importer le module FS
+const path = require('path'); // Importer le module Path
+
+
 
 
 
@@ -26,7 +31,6 @@ app.use(helmet.hsts({
   preload: true // Inclure ce domaine dans la liste de préchargement HSTS
 }));
 
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -36,8 +40,18 @@ app.use(cors({
 
 app.toString('*', cors());
 
-app.listen(port, ()=> {
-    console.log('Bienvenue sur Node JS.');
+// Charger les certificats SSL/TLS auto-signés depuis le dossier certs
+const privateKey = fs.readFileSync(path.join(__dirname, 'cert', 'key.pem'), 'utf8');
+const certificate = fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'), 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+// Créer un serveur HTTPS avec les certificats chargés et l'application Express
+const httpsServer = https.createServer(credentials, app);
+
+
+// Démarrer le serveur HTTPS sur le port spécifié (5000)
+httpsServer.listen(port, ()=> {
+    console.log('Bienvenue sur Node JS! Serveur HTTPS démarré sur port:', `${port}`);
     authenticateDB(); // Appeler la fonction authenticateDB pour vérifier la connexion à la base de données
 });
 

@@ -18,3 +18,12 @@ The Beer API is a RESTful API designed to manage and retrieve information about 
 - Swagger Documentation
 - Pagination
 - Relationships: Handle relationships between entities like beers and their types, colors, and manufacturers.
+
+## Security
+
+- JWT
+- Helmet
+- openssl self-signed certificate
+
+
+
