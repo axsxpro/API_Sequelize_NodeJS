@@ -23,7 +23,7 @@ The Beer API is a RESTful API designed to manage and retrieve information about 
 
 - JWT
 - Helmet
-- openssl self-signed certificate
+- openssl self-signed certificate and redirection request to https
 
 
 
